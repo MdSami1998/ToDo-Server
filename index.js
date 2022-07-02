@@ -16,7 +16,7 @@ app.use(express.json());
 
 
 
-const uri = 'mongodb+srv://user_sami:khOGoVw3Y9MK0mGb@cluster0.yqld3.mongodb.net/?retryWrites=true&w=majority';
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.yqld3.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 async function run() {
@@ -56,7 +56,7 @@ async function run() {
             const result = await taskCollection.updateOne(filter, updateDoc, options);
             res.send(result);
         })
-        
+
         // chechk button api for completed task
 
         app.post('/completedtask', async (req, res) => {
